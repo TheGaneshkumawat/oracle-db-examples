@@ -75,7 +75,15 @@ public class JDBCStoredProcEmployee {
 			
 			
 			Object[] parameterObjArray = new Object[5];
-			
+			empObjArray[0] = Integer.parseInt(input.nextLine());
+			System.out.println("Enter Employee Name:");
+			empObjArray[1] = input.nextLine();
+			System.out.println("Enter Employee Role:");
+			empObjArray[2] = input.nextLine();
+			System.out.println("Enter Employee City:");
+			empObjArray[3] = input.nextLine();
+			System.out.println("Enter Employee Country:");
+			empObjArray[4] = input.nextLine();
 			
 			
 			Struct struct = con.createStruct("TYPE_NAME", parameterObjArray);

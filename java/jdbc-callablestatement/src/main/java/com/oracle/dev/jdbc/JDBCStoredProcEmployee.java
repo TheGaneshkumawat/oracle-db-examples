@@ -23,6 +23,7 @@ package com.oracle.dev.jdbc;
 
 import java.sql.CallableStatement;
 import java.sql.SQLException;
+import java.sql.Struct;
 import java.util.Properties;
 import java.util.concurrent.ThreadLocalRandom;
 
@@ -71,7 +72,14 @@ public class JDBCStoredProcEmployee {
 
 			// JDBC connection
 			con = (OracleConnection) ods.getConnection();
-
+			
+			
+			Object[] parameterObjArray = new Object[5];
+			
+			
+			
+			Struct struct = con.createStruct("TYPE_NAME", parameterObjArray);
+			
 			// CallableStatement
 			// https://docs.oracle.com/en/java/javase/19/docs/api/java.sql/java/sql/CallableStatement.html
 			stmt = con.prepareCall("{call ADMIN.INSERT_EMPLOYEE_PRC(?,?,?,?,?,?)}");
@@ -82,6 +90,7 @@ public class JDBCStoredProcEmployee {
 			stmt.setString(3, role);
 			stmt.setString(4, department);
 			stmt.setString(5, building);
+			stmt.setObject(6, struct);
 
 			// register OUT parameter
 			stmt.registerOutParameter(6, java.sql.Types.VARCHAR);
